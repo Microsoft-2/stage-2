@@ -9,14 +9,11 @@ import java.util.HashMap;
 
 public class DatamartLoader {
 
-    // Path to the datamart created by the Indexing Service
     private static final Path DATAMART_DIR = Paths.get("datamart");
     private static final Path INVERTED_INDEX_FILE = DATAMART_DIR.resolve("inverted_index.json");
     private static final Path METADATA_FILE = DATAMART_DIR.resolve("metadata.json");
     
     private static final Gson GSON = new Gson();
-
-    // A record to hold both datamart structures
     public record Datamart(
         Map<String, Map<Integer, Integer>> invertedIndex,
         Map<Integer, BookMetadata> metadata

@@ -10,7 +10,6 @@ public class IndexBuilder {
 
     private static final Gson GSON = new Gson();
 
-    // A helper record to return both built maps
     public record IndexResult(
         Map<String, Map<Integer, Integer>> invertedIndex,
         Map<Integer, BookMetadata> metadata
@@ -51,9 +50,6 @@ public class IndexBuilder {
         }
     }
 
-    /**
-     * Processes a _header.txt file to extract metadata. [cite: 31, 204]
-     */
     public static void processHeaderFile(Path path, Map<Integer, BookMetadata> metadata) {
         try {
             String content = Files.readString(path);
@@ -75,10 +71,7 @@ public class IndexBuilder {
             int year = 0; // Default
             if (json.has("publication_year")) { // Using this field as it's common
                 year = json.get("publication_year").getAsInt();
-            } else if (json.has("copyright") && !json.get("copyright").isJsonNull()) {
-                 // Fallback: try to parse from copyright year (less reliable)
-                 // This is a simplification; real parsing would be more robust.
-            }
+            } else if (json.has("copyright") && !json.get("copyright").isJsonNull())
 
             metadata.put(bookId, new BookMetadata(bookId, title, author, language, year));
             
