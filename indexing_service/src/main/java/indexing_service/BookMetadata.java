@@ -1,9 +1,6 @@
 package indexing_service;
 
-// A simple record to hold metadata extracted from the _header.txt files.
-// We will store a map of <BookID, BookMetadata> in our datamart.
 public class BookMetadata {
-    // Making fields public for simple Gson serialization
     public int bookId;
     public String title;
     public String author;
@@ -18,6 +15,5 @@ public class BookMetadata {
         this.year = year;
     }
     
-    // Default constructor for Gson
     public BookMetadata() { }
 }

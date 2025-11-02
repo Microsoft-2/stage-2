@@ -17,12 +17,10 @@ public class Controller {
     public static void main(String[] args) throws IOException, InterruptedException {
         Files.createDirectories(CONTROL_DIR);
 
-        // Example list of books to process
         List<String> bookIds = List.of("1342", "84", "2701");
 
         HttpClient client = HttpClient.newHttpClient();
 
-        // Download each book (trigger ingestion service)
         List<String> downloaded = new ArrayList<>();
         for (String bookId : bookIds) {
             HttpRequest req = HttpRequest.newBuilder()
@@ -36,7 +34,6 @@ public class Controller {
 
         Files.write(DOWNLOADED_FILE, downloaded);
 
-        // Trigger indexing service
         HttpRequest indexReq = HttpRequest.newBuilder()
             .uri(URI.create("http://localhost:7002/index/rebuild"))
             .POST(HttpRequest.BodyPublishers.noBody())
