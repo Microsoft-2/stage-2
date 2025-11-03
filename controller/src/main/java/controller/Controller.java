@@ -17,7 +17,7 @@ public class Controller {
     public static void main(String[] args) throws IOException, InterruptedException {
         Files.createDirectories(CONTROL_DIR);
 
-        List<String> bookIds = List.of("1342", "84", "2701");
+        List<String> bookIds = List.of("11", "1260", "1342");
 
         HttpClient client = HttpClient.newHttpClient();
 
