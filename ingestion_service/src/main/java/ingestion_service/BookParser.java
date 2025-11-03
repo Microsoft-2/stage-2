@@ -28,11 +28,15 @@ public class BookParser {
                 }
             }
         }
-        
+
+        // No lanzamos RuntimeException, simplemente devolvemos null
+        // o un valor vacío para que el IngestionController pueda manejarlo.
         if (fullTextUrl == null) {
-            throw new RuntimeException("No se encontró el URL del archivo .txt para el Book ID: " + bookId);
+            System.err.println("Advertencia: No se encontró el URL del archivo .txt para el Book ID: " + bookId);
         }
-        
+
+        // Devolvemos la BookInfo; si fullTextUrl es null, el Downloader fallará,
+        // pero el IngestionController lo manejará con un estado 500 más limpio.
         return new BookInfo(bookId, title, author, fullTextUrl);
     }
 }

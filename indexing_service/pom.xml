@@ -35,6 +35,13 @@
             <version>3.45.3.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+
+
         <!-- HTTP Client (Java 11+ built-in, but optional external lib) -->
     </dependencies>
 
