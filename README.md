@@ -2,8 +2,8 @@
 
 ##  Overview
 
-**Stage 2** is a modular **Java** project designed to implement a system for **data ingestion, indexing, and search**.  
-Its goal is to provide a scalable, decoupled architecture capable of processing large data volumes and delivering efficient search capabilities.
+ **Stage 2** is a modular **Java** project designed to implement a system for **data ingestion, indexing, and search**.  
+ Its goal is to provide a scalable, decoupled architecture capable of processing large data volumes and delivering efficient search capabilities.
 ---
 
 ##  Project Architecture
