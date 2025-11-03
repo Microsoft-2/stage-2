@@ -7,6 +7,8 @@ import java.nio.file.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import indexing_service.BookMetadata;
+
 
 // Configure the benchmark settings
 @BenchmarkMode(Mode.Throughput) // Measure operations per second
@@ -52,10 +54,14 @@ public class IndexingBenchmark {
 
     // @TearDown runs after the benchmark to clean up.
     @TearDown(Level.Trial)
-    public void tearDown() throws IOException {
-        Files.delete(sampleBodyPath);
-        Files.delete(sampleHeaderPath);
-    }
+    public void tearDown() {
+        try {
+            Files.deleteIfExists(sampleBodyPath);
+            Files.deleteIfExists(sampleHeaderPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }Si
 
     // This is the benchmark for text tokenization and index update [cite: 326, 328]
     @Benchmark
