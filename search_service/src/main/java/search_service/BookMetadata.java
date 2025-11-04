@@ -7,6 +7,6 @@ public class BookMetadata {
     public String language;
     public int year;
 
-¡    public BookMetadata() { }
+    public BookMetadata() { }
 
-¡}
+}

@@ -1,0 +1,5 @@
+ingestion_service\BookParser.class
+ingestion_service\IngestionController.class
+ingestion_service\App.class
+ingestion_service\BookInfo.class
+ingestion_service\Downloader.class
