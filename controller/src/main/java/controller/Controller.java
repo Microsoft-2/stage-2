@@ -15,7 +15,6 @@ public class Controller {
     private static final Path DOWNLOADED_FILE = CONTROL_DIR.resolve("downloaded_books.txt");
     private static final Path INDEXED_FILE = CONTROL_DIR.resolve("indexed_books.txt");
 
-    // Configuración para la selección aleatoria:
     private static final int MAX_BOOK_ID = 5000;      // Rango máximo de IDs disponibles en la "biblioteca"
     private static final int BOOKS_TO_INGEST = 10;    // Número de libros aleatorios a seleccionar en cada ejecución
 

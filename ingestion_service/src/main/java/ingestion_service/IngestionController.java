@@ -16,11 +16,9 @@ public class IngestionController {
         HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
         conn.setRequestMethod("GET");
 
-        // 1. Obtener Metadatos y Parsear
         String jsonResponse = new String(conn.getInputStream().readAllBytes());
         BookInfo bookInfo = BookParser.extractBookInfo(jsonResponse, bookId); // Usar el parser
 
-        // 2. Definir Rutas y Crear Directorios
         String datePart = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String hourPart = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH"));
 
@@ -28,10 +26,8 @@ public class IngestionController {
         Path bookDir = Paths.get(path);
         Files.createDirectories(bookDir);
 
-        // 3. Escribir Header (siempre se guarda)
         Files.writeString(bookDir.resolve(bookId + "_header.txt"), jsonResponse);
 
-        // 4. Chequeo de Nulidad (previene NPE, ya implementado)
         if (bookInfo.fullTextUrl == null) {
             System.err.println("Advertencia: URL de texto completo no encontrado para el Book ID: " + bookId);
             ctx.status(404).json(Map.of(
@@ -41,15 +37,8 @@ public class IngestionController {
             return;
         }
 
-        String directDownloadUrl = String.format(
-                "https://www.gutenberg.org/files/%s/%s-0.txt",
-                bookId,
-                bookId
-        );
-
         try {
-            // 5. Descargar con el URL
-            String fullText = Downloader.downloadText(directDownloadUrl);
+            String fullText = Downloader.downloadText(bookInfo.fullTextUrl);
             Files.writeString(bookDir.resolve(bookId + "_body.txt"), fullText);
         } catch (IOException e) {
             System.err.println("Error downloading full text for book " + bookId + ": " + e.getMessage());
@@ -57,7 +46,6 @@ public class IngestionController {
             return;
         }
 
-        // 6. Caso de éxito
         ctx.json(Map.of(
                 "book_id", Integer.parseInt(bookId),
                 "status", "downloaded",
